@@ -24,36 +24,30 @@ class Vector {
     }
   
     add(vec) {
-        let x = this._x, y = this._y;
-        let result = false;
         try {
-            result = new Vector(x + vec._x, y + vec._y);
+            this._x += vec._x;
+            this._y += vec._y;
         } catch (error) {
             console.log(`ERROR: ${error}`);
-        } finally {
-            return result;
         }
     }
-
+    
     add(vx,vy) {
-        let x = this._x, y = this._y;
-        let result = false;
         try {
-            result = new Vector(x + vx, y + vy);
+            this._x += vx;
+            this._y += vy;
         } catch (error) {
         console.log(`ERROR: ${error}`);
-        }
-        finally {
-            return result;
         }
     }
 
     normalize() {
-        let x = this._x, y = this._y;
-        let mag = this.length;
-        return new Vector(x / mag, y / mag);
+        if (this._x != 0 && this._y != 0) {
+            let mag = this.length;
+            this._x /= mag;
+            this._y /= mag; 
+        }
     }
-
 }
 
 export {Vector};
