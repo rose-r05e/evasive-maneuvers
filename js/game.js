@@ -88,6 +88,7 @@ function moveShip() {
         direction.add(0,1);
     }
     direction = direction.normalize();
+    console.log("vx=" + direction.x +" vy=" + direction.y);
     ship.x += direction.x * ship.speed;
     ship.y += direction.y * ship.speed;
     console.log("x=" + ship.x +" y=" + ship.y);
