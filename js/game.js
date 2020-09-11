@@ -1,5 +1,4 @@
 import {Vector} from './vector.js';
-//const Vector = require('./vector');
 
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
@@ -76,20 +75,18 @@ function drawShip() {
 function moveShip() {
     let direction = new Vector(0,0);
     if(keyState.up) {
-        direction.add(-1,0);
-    }
-    if(keyState.down) {
-        direction.add(1,0);
-    }
-    if(keyState.left) {
         direction.add(0,-1);
     }
-    if(keyState.right) {
+    if(keyState.down) {
         direction.add(0,1);
     }
-    if (direction.x != 0 && direction.y != 0) {
-        direction = direction.normalize();
+    if(keyState.left) {
+        direction.add(-1,0);
     }
+    if(keyState.right) {
+        direction.add(1,0);
+    }
+    direction.normalize();
     console.log("vx=" + direction.x +" vy=" + direction.y);
     ship.x += direction.x * ship.speed;
     ship.y += direction.y * ship.speed;
