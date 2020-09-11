@@ -56,5 +56,4 @@ class Vector {
 
 }
 
-//export {Vector};
-//module.exports = Vector;
+export {Vector};
