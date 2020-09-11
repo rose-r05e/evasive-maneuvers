@@ -1,4 +1,4 @@
-import Vector from 'vector';
+import {Vector} from 'js/vector.js';
 //const Vector = require('./vector');
 
 const ARROW_UP = 38;
