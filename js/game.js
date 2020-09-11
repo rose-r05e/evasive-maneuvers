@@ -17,8 +17,8 @@ const ESC = 27;
 
 const FPS = 30;
 
-canvas = document.getElementById('gameCanvas');
-ctx = canvas.getContext('2d');
+var canvas = document.getElementById('gameCanvas');
+var ctx = canvas.getContext('2d');
 
 var keyState = {
     up: false,
