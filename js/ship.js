@@ -1,10 +1,10 @@
 class Ship {
 
-    constructor() {
-        this.x = CANVAS.width * 1/2;
-        this.y = CANVAS.height * 3/4;
-        this.r = CANVAS.width * 1/20;
-        this.speed = CANVAS.height * 1/50;
+    constructor(CANVAS) {
+        this.x = GAME_SIZE.WIDTH * 1/2;
+        this.y = GAME_SIZE.HEIGHT * 3/4;
+        this.r = GAME_SIZE.WIDTH * 1/20;
+        this.speed = GAME_SIZE.HEIGHT * 1/50;
         this.movement = createVector(0,0);
         this.initialize();
     }
