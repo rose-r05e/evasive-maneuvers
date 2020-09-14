@@ -18,6 +18,9 @@ var game_size = {
 }
 const FPS = 30;
 
+var ship;
+//var asteroids[];
+
 
 var gameData = {
   a: 1.5 * Math.PI
@@ -39,7 +42,10 @@ function Setup() {
     let cnv = createCanvas(game_size.width, game_size.height);
     background('black');
     cnv.parent('gameContainer');
-    var ship = new Ship();
+}
+
+function init() {
+    ship = new Ship();
 }
 
 function update(e) {
@@ -63,6 +69,6 @@ function keyPressed() {
     }
     ship.movement = tempVector;
 }
-
+init();
 setInterval(update, 1000 / FPS);
 //DOBRZE!
