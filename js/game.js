@@ -35,8 +35,9 @@ var gameData = {
 // }
 //PRZEANALIZOWAĆ
 
-function init() {
+function Setup() {
     let cnv = createCanvas(game_size.width, game_size.height);
+    background('black');
     cnv.parent('gameContainer');
     var ship = new Ship();
 }
@@ -63,6 +64,5 @@ function keyPressed() {
     ship.movement = tempVector;
 }
 
-init();
 setInterval(update, 1000 / FPS);
 //DOBRZE!
