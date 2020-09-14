@@ -12,9 +12,9 @@ const SPACE = 32;
 const ENTER = 13;
 const ESC = 27;
 
-const GAME_SIZE = {
-    HEIGHT: 848,
-    WIDTH: 470
+var game_size = {
+    height: 848,
+    width: 470
 }
 const FPS = 30;
 
@@ -36,7 +36,7 @@ var gameData = {
 //PRZEANALIZOWAĆ
 
 function init() {
-    let cnv = createCanvas(GAME_SIZE.WIDTH, GAME_SIZE.HEIGHT);
+    let cnv = createCanvas(game_size.width, game_size.height);
     cnv.parent('gameContainer');
     var ship = new Ship();
 }
