@@ -15,8 +15,8 @@ const ENTER = 13;
 const ESC = 27;
 
 const GAME_SIZE = {
-    HEIGHT: 848,
-    WIDTH: 470
+    height: 848,
+    width: 470
 }
 const FPS = 30;
 
@@ -47,7 +47,7 @@ function Setup() {
 }
 
 function init() {
-    ship = new Ship();
+    ship = new Ship(GAME_SIZE);
 }
 
 function update(e) {
