@@ -18,9 +18,6 @@ const GAME_SIZE = {
 }
 const FPS = 30;
 
-const CANVAS = document.getElementById('gameCanvas');
-const CONTEXT = CANVAS.getContext('2d');
-
 
 var gameData = {
   a: 1.5 * Math.PI
