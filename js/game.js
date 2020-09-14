@@ -1,4 +1,4 @@
-import {Ship} from './ship.js';
+//import {Ship} from './ship.js';
 
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
