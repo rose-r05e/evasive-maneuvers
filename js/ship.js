@@ -50,4 +50,4 @@ class Ship {
     }
 }
 
-export {Vector};
+export {Ship};
