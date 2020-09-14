@@ -1,5 +1,3 @@
-import {Vector} from './vector.js';
-
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
 const ARROW_LEFT = 37;
@@ -16,124 +14,52 @@ const ESC = 27;
 
 const FPS = 30;
 
-var canvas = document.getElementById('gameCanvas');
-var ctx = canvas.getContext('2d');
+const CANVAS = document.getElementById('gameCanvas');
+const CONTEXT = CANVAS.getContext('2d');
 
-var keyState = {
-    up: false,
-    down: false,
-    left: false,
-    right: false
-}
-
-var ship = {
-    x: canvas.width * 1/2,
-    y: canvas.height * 3/4,
-    r: canvas.width * 1/20,
-    speed: canvas.height * 1/50
-}
 
 var gameData = {
   a: 1.5 * Math.PI
 }
 //????Przechowywać punkty i wartości do rysowania?
 
-function clamp(v, min, max) {
-  if (v < min) {
-    return min;
-  } else if (v > max) {
-    return max;
-  } else {
-    return v;
-  }
-}
+// function clamp(v, min, max) {
+//   if (v < min) {
+//     return min;
+//   } else if (v > max) {
+//     return max;
+//   } else {
+//     return v;
+//   }
+// }
 //PRZEANALIZOWAĆ
 
-function drawShip() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); //czyszczenie pola gry
-  ctx.strokeStyle = "white";
-  ctx.lineWidth = canvas.width/300;
-  ctx.beginPath();
-  ctx.moveTo( // rear left
-    ship.x - ship.r * (2 / 3 * Math.cos(gameData.a) + 0.5 * Math.sin(gameData.a)),
-    ship.y + ship.r * (2 / 3 * Math.sin(gameData.a) - 0.5 * Math.cos(gameData.a))
-  );
-  ctx.lineTo( // rear centre (behind the ship)
-      ship.x - ship.r * 5 / 3 * Math.cos(gameData.a),
-      ship.y + ship.r * 5 / 3 * Math.sin(gameData.a)
-  );
-  ctx.lineTo( // rear right
-      ship.x - ship.r * (2 / 3 * Math.cos(gameData.a) - 0.5 * Math.sin(gameData.a)),
-      ship.y + ship.r * (2 / 3 * Math.sin(gameData.a) + 0.5 * Math.cos(gameData.a))
-  );
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
+function init() {
+    var ship = new Ship();
 }
-//DOBRZE ALE ZOPTYMALIZOWAĆ, ŻEBY NIE LICZYŁO CIĄGLE TYCH SAMYCH SINusów i COSinusów
-
-function moveShip() {
-    let direction = new Vector(0,0);
-    if(keyState.up) {
-        direction.add(0,-1);
-    }
-    if(keyState.down) {
-        direction.add(0,1);
-    }
-    if(keyState.left) {
-        direction.add(-1,0);
-    }
-    if(keyState.right) {
-        direction.add(1,0);
-    }
-    direction.normalize();
-    console.log("vx=" + direction.x +" vy=" + direction.y);
-    ship.x += direction.x * ship.speed;
-    ship.y += direction.y * ship.speed;
-    console.log("x=" + ship.x +" y=" + ship.y);
-}
-//DOBRZE
 
 function update(e) {
-  moveShip();
-  drawShip();
+    ship.move();
 }
-//DOBRZE, ale nieskończone chyba
+//DOBRZE, ale nieskończone
 
-function onKeyDown(e) {
-    if (e.keyCode == ARROW_UP) {
-        keyState.up = true;
+function keyPressed() {
+    let tempVector = createVector(0,0);
+    if(keyCode == ARROW_UP) {
+        tempVector.add(0,-1);
     }
-    if (e.keyCode == ARROW_DOWN) {
-        keyState.down = true;
+    if(keyCode == ARROW_DOWN) {
+        tempVector.add(0,1);
     }
-    if (e.keyCode == ARROW_LEFT) {
-        keyState.left = true;
+    if(keyCode == ARROW_LEFT) {
+        tempVector.add(-1,0);
     }
-    if (e.keyCode == ARROW_RIGHT) {
-        keyState.right = true;
+    if(keyCode == ARROW_RIGHT) {
+        tempVector.add(1,0);
     }
+    ship.movement = tempVector;
 }
-//DOBRZE
 
-function onKeyUp(e) {
-    if (e.keyCode == ARROW_UP) {
-        keyState.up = false;
-    }
-    if (e.keyCode == ARROW_DOWN) {
-        keyState.down = false;
-    }
-    if (e.keyCode == ARROW_LEFT) {
-        keyState.left = false;
-    }
-    if (e.keyCode == ARROW_RIGHT) {
-        keyState.right = false;
-    }
-}
-//DOBRZE
-
-//init();
-window.addEventListener("keydown", onKeyDown);
-window.addEventListener("keyup", onKeyUp);
+init();
 setInterval(update, 1000 / FPS);
 //DOBRZE!
