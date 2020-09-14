@@ -8,7 +8,7 @@ class Ship {
         this.movement = createVector(0,0);
         this.initialize();
     }
-
+    /*
     set x(newX) {
         this.x = newX;
     }
@@ -22,6 +22,7 @@ class Ship {
     get y() {
         return this.y;
     }
+    */
 
     set movement(newMovement) {
         this.movement = newMovement;
