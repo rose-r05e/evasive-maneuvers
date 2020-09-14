@@ -49,3 +49,5 @@ class Ship {
         triangle(-this.r, this.r, this.r, this.r, 0, this.r);
     }
 }
+
+export {Vector};
