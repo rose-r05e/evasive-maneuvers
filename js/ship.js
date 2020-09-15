@@ -5,7 +5,7 @@ class Ship {
         this.y = game_size.height * 3/4;
         this.r = game_size.wight * 1/20;
         this.speed = game_size.height * 1/50;
-        this.movement = createVector(0,0);
+        this.movement = new Vector(0,0);
         this.initialize();
     }
     /*
@@ -32,7 +32,7 @@ class Ship {
     }
 
     move() {
-        if (this.movement.x != 0 && this.movement.y != 0) { movement.normalize(); }
+        movement.normalize();
         console.log("vx=" + movement.x +" vy=" + movement.y);
         this.x += movement.x * this.speed;
         this.y += movement.y * this.speed;
