@@ -56,7 +56,7 @@ function update(e) {
 //DOBRZE, ale nieskończone
 
 function keyPressed() {
-    let tempVector = createVector(0,0);
+    let tempVector = new Vector(0,0);
     if(keyCode == ARROW_UP) {
         tempVector.add(0,-1);
     }
