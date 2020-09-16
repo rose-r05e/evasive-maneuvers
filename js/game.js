@@ -40,7 +40,7 @@ var gameData = {
 // }
 //PRZEANALIZOWAĆ
 
-function Setup() {
+function setup() {
     let cnv = createCanvas(GAME_SIZE.WIDTH, GAME_SIZE.HEIGHT);
     background('black');
     cnv.parent('gameContainer');
