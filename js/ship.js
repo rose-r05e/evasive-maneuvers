@@ -10,8 +10,7 @@ class Ship {
     }
 
     set movement(newMovement) {
-        this.movement.x = newMovement.x;
-        this.movement.y = newMovement.y;
+        this.movement = new Vector(newMovement.x,newMovement.y);
     }
 
     move() {
