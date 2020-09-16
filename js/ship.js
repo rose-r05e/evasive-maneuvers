@@ -9,9 +9,9 @@ class Ship {
         this.initialize();
     }
 
-    set movement(newX, newY) {
-        this.movement.x = newX;
-        this.movement.y = newY;
+    set movement(newMovement) {
+        this.movement.x = newMovement.x;
+        this.movement.y = newMovement.y;
     }
 
     move() {
