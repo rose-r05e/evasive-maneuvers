@@ -8,27 +8,10 @@ class Ship {
         this.movement = new Vector(0,0);
         this.initialize();
     }
-    /*
-    set x(newX) {
-        this.x = newX;
-    }
-    get x() {
-        return this.x;
-    }
 
-    set y(newY) {
-        this.y = newY;
-    }
-    get y() {
-        return this.y;
-    }
-    */
-
-    set movement(newMovement) {
-        this.movement = newMovement;
-    }
-    get movement() {
-        return this.movement;
+    set movement(newX, newY) {
+        this.movement.x = newX;
+        this.movement.y = newY;
     }
 
     move() {
