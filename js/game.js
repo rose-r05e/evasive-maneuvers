@@ -28,12 +28,7 @@ var keyState = {
     right: false
 }
 
-
-var gameData = {
-  a: 1.5 * Math.PI
-}
 //????Przechowywać punkty i wartości do rysowania?
-
 // function clamp(v, min, max) {
 //   if (v < min) {
 //     return min;
@@ -55,11 +50,12 @@ function init() {
     ship = new Ship(GAME_SIZE);
 }
 
-function update() {
-    ship.update(keyState);
+function update(e) {
+    ship.move(keyState);
 }
 //DOBRZE, ale nieskończone
-  
+
+
 function onKeyDown(e) {
     if (e.keyCode == ARROW_UP) {
        keyState.up = true;
@@ -75,7 +71,6 @@ function onKeyDown(e) {
     }
 }
 //DOBRZE
-  
 function onKeyUp(e) {
     if (e.keyCode == ARROW_UP) {
         keyState.up = false;
@@ -91,7 +86,8 @@ function onKeyUp(e) {
     }
 }
 //DOBRZE
-  
+
+
 init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
