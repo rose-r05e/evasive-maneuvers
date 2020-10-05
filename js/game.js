@@ -18,8 +18,8 @@ const GAME_SIZE = {
 }
 const FPS = 30;
 
-var canvas = document.getElementById("gameContainer");
-var context = canvas.getContext("2d");
+var canvas = document.getElementById('gameContainer');
+var context = canvas.getContext('2d');
 
 var ship;
 //var asteroids[];
