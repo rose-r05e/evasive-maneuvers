@@ -45,7 +45,7 @@ class Point {
 
     // Returns true if the point p lies  
     // inside the polygon[] with n vertices 
-    get isInside(polygon) 
+    isInside(polygon) 
     { 
         let n = polygon.points.lenght;
         let inf = 10000; 
