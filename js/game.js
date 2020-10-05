@@ -18,6 +18,8 @@ const GAME_SIZE = {
 }
 const FPS = 30;
 
+var canvasContext;
+
 var ship;
 //var asteroids[];
 
@@ -28,12 +30,7 @@ var keyState = {
     right: false
 }
 
-
-var gameData = {
-  a: 1.5 * Math.PI
-}
 //????Przechowywać punkty i wartości do rysowania?
-
 // function clamp(v, min, max) {
 //   if (v < min) {
 //     return min;
@@ -45,21 +42,21 @@ var gameData = {
 // }
 //PRZEANALIZOWAĆ
 
-function setup() {
+function init() {
     let cnv = createCanvas(GAME_SIZE.WIDTH, GAME_SIZE.HEIGHT);
     background('black');
     cnv.parent('gameContainer');
+    canvasContext = cnv.getContext("2d");
+    ship = new Ship(GAME_SIZE, canvasContext);
 }
 
-function init() {
-    ship = new Ship(GAME_SIZE);
-}
-
-function update() {
-    ship.update(keyState);
+function update(e) {
+    ship.move(keyState, canvasContext);
+    //dodac kontekst do move()
 }
 //DOBRZE, ale nieskończone
-  
+
+
 function onKeyDown(e) {
     if (e.keyCode == ARROW_UP) {
        keyState.up = true;
@@ -75,7 +72,6 @@ function onKeyDown(e) {
     }
 }
 //DOBRZE
-  
 function onKeyUp(e) {
     if (e.keyCode == ARROW_UP) {
         keyState.up = false;
@@ -91,7 +87,8 @@ function onKeyUp(e) {
     }
 }
 //DOBRZE
-  
+
+
 init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);

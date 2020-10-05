@@ -1,42 +1,37 @@
 class Ship {
 
-    constructor(game_size) {
-        this.x = game_size.width * 1/2;
-        this.y = game_size.height * 3/4;
-        this.r = game_size.wight * 1/20;
-        this.speed = game_size.height * 1/50;
-        this.initialize();
-    }
+    constructor(game_size, ctx) {
 
-    update(keyState) {
-        let movement = createVector(0,0);
-        if(keyState.up) {
+        this._shipShape = new Polygon([new Point(0,5), new Point(-5, -5), new Point(5, -5)]);
+        this._shipCenter = new Point(game_size.width * 1/2, game_size.height * 3/4);
+        this._speed = game_size.height * 1/50;
+        this.initialize(ctx);
+    }
+    move(ks, ctx) {
+        let movementVector = new Vector(0,0);
+        if(ks.up) {
             tempVector.add(0,-1);
         }
-        if(keyState.down) {
+        if(ks.down) {
             tempVector.add(0,1);
         }
-        if(keyState.left) {
+        if(ks.left) {
             tempVector.add(-1,0);
         }
-        if(keyState.right) {
+        if(ks.right) {
             tempVector.add(1,0);
         }
-        movement.normalize();
-        console.log("vx=" + movement.x +" vy=" + movement.y);
-        this.x += movement.x * this.speed;
-        this.y += movement.y * this.speed;
-        console.log("x=" + this.x +" y=" + this.y);
-        translate(this.x, this.y);
-        noFill();
-        stroke(255);
-        triangle(-this.r, this.r, this.r, this.r, 0, this.r);
+        movementVector.normalize();
+        movementVector.multiply(this._speed);
+        this._shipCenter.translate(movementVector);
+        this._shipShape.translate(this._shipCenter);
+        drawPolygon(this._shipShape, ctx);
     }
 
-    initialize() {
-        translate(this.x, this.y);
-        noFill();
-        stroke(255);
-        triangle(-this.r, this.r, this.r, this.r, 0, this.r);
+    initialize(ctx) {
+        this._shipShape.translate(this._shipCenter);
+        drawPolygon(this._shipShape, ctx);
     }
 }
+
+//export {Ship};
