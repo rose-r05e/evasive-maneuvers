@@ -1,6 +1,6 @@
 class Point {
     /**
-    * A polet is defined as a pair of X and Y coordinates.
+    * A point is defined as a pair of X and Y coordinates.
     * Each operational method can accept either a Vector object or X and Y coordinates.
     *
     * @param {x} x
@@ -26,8 +26,8 @@ class Point {
     }
   
     /**
-    * translates a polet
-    * polet.translate(vector) or polet.translate(x,y)
+    * translates a point
+    * point.translate(vector) or point.translate(x,y)
     * @param {(number|Object)} arg1 - x or Vector object.
     * @param {(number|undefined)} arg2 - y or blank.
     */
@@ -36,11 +36,11 @@ class Point {
             this._x += arg1.x;
             this._y += arg1.y;
         }
-        else if (typeof arg1 === 'number' && typeof arg1 === 'number') {
+        else if (typeof arg1 === 'number' && typeof arg2 === 'number') {
             this._x += arg1;
             this._y += arg2;
         }
-        else throw new TypeError('Wrong type of arguments in polet.translate().');
+        else throw new TypeError('Wrong type of arguments in point.translate().');
     }
 
     // Returns true if the point p lies  
@@ -85,21 +85,21 @@ class Point {
 }
 
 /**
- * returns a distance between two polets
- * @param {Object} polet1 - Polet
- * @param {Object} polet2 - Polet
+ * returns a distance between two points
+ * @param {Object} point1 - Point
+ * @param {Object} point2 - Point
  */
-function distance(polet1, polet2) {
-    if(polet1 instanceof Polet && polet2 instanceof Polet) {
-        let a = Math.abs(polet1.x - polet2.x);
-        let b = Math.abs(polet1.y - polet2.y);
+function distance(point1, point2) {
+    if(point1 instanceof Point && point2 instanceof Point) {
+        let a = Math.abs(point1.x - point2.x);
+        let b = Math.abs(point1.y - point2.y);
         return Math.sqrt(a*a + b*b);
     }
     else throw new TypeError('Wrong type of arguments in distance().');
 }
 
-// Given three colinear polets p, q, r,  
-// the function checks if polet q lies 
+// Given three colinear points p, q, r,  
+// the function checks if point q lies 
 // on line segment 'pr' 
 function onSegment(p, q, r)  
 { 

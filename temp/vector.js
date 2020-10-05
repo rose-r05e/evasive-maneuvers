@@ -52,11 +52,11 @@ class Vector {
             this._x += arg1.x;
             this._y += arg1.y;
          }
-        else if (typeof arg1 === 'number' && typeof arg1 === 'number') {
+        else if (typeof arg1 === 'number' && typeof arg2 === 'number') {
              this._x += arg1;
              this._y += arg2;
          }
-         else throw new TypeError('Wrong type of arguments in vector.add().');
+         else throw new TypeError('Wrong type of arguments in vector.add().')
     }
     
     /**
@@ -70,16 +70,16 @@ class Vector {
             this._x -= arg1.x;
             this._y -= arg1.y;
          }
-        else if (typeof arg1 === 'number' && typeof arg1 === 'number') {
+        else if (typeof arg1 === 'number' && typeof arg2 === 'number') {
              this._x -= arg1;
              this._y -= arg2;
          }
-         else throw new TypeError('Wrong type of arguments in vector.subtract().');
+         else throw new TypeError('Wrong type of arguments in vector.subtract().')
     }
     
     /**
     * multiplies two vectors
-    * vector.multiply(vector) or vector.multiply(x,y)
+    * vector.multiply(vector) or vector.multiply(x,y) or vector.multiply(n)
     * @param {(number|Object)} arg1 - x or Vector object.
     * @param {(number|undefined)} arg2 - y or blank.
     */
@@ -88,16 +88,20 @@ class Vector {
             this._x *= arg1.x;
             this._y *= arg1.y;
          }
-        else if (typeof arg1 === 'number' && typeof arg1 === 'number') {
+        else if (typeof arg1 === 'number' && typeof arg2 === 'number') {
              this._x *= arg1;
              this._y *= arg2;
-         }
-         else throw new TypeError('Wrong type of arguments in vector.multiply().');
+        }
+        else if (typeof arg1 === 'number' && typeof arg2 === 'undefined') {
+             this._x *= arg1;
+             this._y *= arg1;
+        }
+        else throw new TypeError('Wrong type of arguments in vector.multiply().')
     }
     
     /**
     * divides two vectors
-    * vector.divide(vector) or vector.divide(x,y)
+    * vector.divide(vector) or vector.divide(x,y) or vector.divide(n)
     * @param {(number|Object)} arg1 - x or Vector object.
     * @param {(number|undefined)} arg2 - y or blank.
     */
@@ -105,12 +109,16 @@ class Vector {
         if(arg1 instanceof Vector && typeof arg2 === 'undefined') {
             this._x /= arg1.x;
             this._y /= arg1.y;
-         }
-        else if (typeof arg1 === 'number' && typeof arg1 === 'number') {
+        }
+        else if (typeof arg1 === 'number' && typeof arg2 === 'number') {
              this._x /= arg1;
              this._y /= arg2;
-         }
-         else throw new TypeError('Wrong type of arguments in vector.divide().');
+        }
+        else if (typeof arg1 === 'number' && typeof arg2 === 'undefined') {
+             this._x /= arg1;
+             this._y /= arg1;
+        }
+        else throw new TypeError('Wrong type of arguments in vector.divide().')
     }
 
     /**
