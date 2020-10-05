@@ -18,7 +18,8 @@ const GAME_SIZE = {
 }
 const FPS = 30;
 
-var canvasContext;
+var canvas = document.getElementById("gameContainer");
+var context = canvas.getContext("2d");
 
 var ship;
 //var asteroids[];
@@ -43,11 +44,7 @@ var keyState = {
 //PRZEANALIZOWAĆ
 
 function init() {
-    let cnv = createCanvas(GAME_SIZE.WIDTH, GAME_SIZE.HEIGHT);
-    background('black');
-    cnv.parent('gameContainer');
-    canvasContext = cnv.getContext("2d");
-    ship = new Ship(GAME_SIZE, canvasContext);
+    ship = new Ship(GAME_SIZE, context);
 }
 
 function update(e) {
