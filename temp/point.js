@@ -32,6 +32,7 @@ class Point {
     * @param {(number|undefined)} arg2 - y or blank.
     */
     translate(arg1,arg2) {
+        console.log("arg1 type: "+ typeof arg1 + "arg2 type: " + typeof arg2);
         if(arg1 instanceof Vector && typeof arg2 === 'undefined') {
             this._x += arg1.x;
             this._y += arg1.y;
