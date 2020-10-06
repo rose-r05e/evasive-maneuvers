@@ -24,12 +24,12 @@ class Ship {
         movementVector.normalize();
         movementVector.multiply(this._speed);
         this._shipCenter.translate(movementVector);
-        this._shipShape.translate(this._shipCenter);
+        this._shipShape.translate(this._shipCenter.x, this._shipCenter.y);
         drawPolygon(this._shipShape, ctx);
     }
 
     initialize(ctx) {
-        this._shipShape.translate(this._shipCenter);
+        this._shipShape.translate(this._shipCenter.x, this._shipCenter.y);
         drawPolygon(this._shipShape, ctx);
     }
 }
