@@ -26,14 +26,14 @@ class Polygon {
     }
 
     translate(vector) {
-        for (i = 0; i < this._points.length; i++) {
+        for (var i = 0; i < this._points.length; i++) {
             this._points[i].translate(vector);
         }
     }
 
     get perimeter() {
         let per = 0;
-        for (i = 0; i < this.points.length-1; i++) {
+        for (var i = 0; i < this.points.length-1; i++) {
             per += distance(this.points[i], this.points[i+1]);
         }
         per += distance(this.points[this.points.length-1], this.points[0]);
