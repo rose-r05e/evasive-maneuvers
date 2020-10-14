@@ -3,8 +3,8 @@ class Point {
     * A point is defined as a pair of X and Y coordinates.
     * Each operational method can accept either a Vector object or X and Y coordinates.
     *
-    * @param {x} x
-    * @param {y} y
+    * @param {number} x
+    * @param {number} y
     */
     constructor(x,y) {
         this._x = x;
@@ -32,8 +32,6 @@ class Point {
     * @param {(number|undefined)} arg2 - y or blank.
     */
     translate(arg1,arg2) {
-        if(arg1 instanceof Vector) {console.log("arg1 is instance of Vector");} else {console.log("arg1 is NOT instance of Vector");}
-        console.log("arg1 type: "+ typeof arg1 + " arg2 type: " + typeof arg2);
         if(arg1 instanceof Vector && typeof arg2 === 'undefined') {
             this._x += arg1.x;
             this._y += arg1.y;

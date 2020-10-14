@@ -4,14 +4,14 @@ class Polygon {
         if (args[0] instanceof Array) {
             for (let element of args[0]) {
                 if (element instanceof Point) {
-                    this._points.push(element);
+                    this._points.push(new Point(element.x, element.y));
                 }
             }
         }
         else if (args[0] instanceof Point) {
             for (let element of args) {
                 if (element instanceof Point) {
-                    this._points.push(element);
+                    this._points.push(new Point(element.x, element.y));
                 }
             }
         }
@@ -25,11 +25,21 @@ class Polygon {
         return this._points;
     }
 
-    translate(vector) {
-        for (var i = 0; i < this._points.length; i++) {
-            this._points[i].translate(vector);
+    translate(arg1,arg2) {
+        if(arg1 instanceof Vector && typeof arg2 === 'undefined') {
+            for (var i = 0; i < this._points.length; i++) {
+                this._points[i].translate(arg1);
+            }
         }
+        else if (typeof arg1 === 'number' && typeof arg2 === 'number') {
+            for (var i = 0; i < this._points.length; i++) {
+                this._points[i].translate(arg1,arg2);
+            }
+        }
+        else throw new TypeError('Wrong type of arguments in polygon.translate().');
     }
+
+    copy() { return new Polygon(this.points);}
 
     get perimeter() {
         let per = 0;

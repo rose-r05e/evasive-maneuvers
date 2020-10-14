@@ -16,13 +16,16 @@ const GAME_SIZE = {
     height: 848,
     width: 470
 }
-const FPS = 30;
+const INTERSPACE = 30;
+const FPS = 60;
 
-var canvas = document.getElementById('gameContainer');
-var context = canvas.getContext('2d');
+const CANVAS = document.getElementById('gameContainer');
+CANVAS.height = GAME_SIZE.height;
+CANVAS.width = GAME_SIZE.width;
+const CONTEXT = CANVAS.getContext('2d');
 
 var ship;
-//var asteroids[];
+var asteroids = new Array();
 
 var keyState = {
     up: false,
@@ -44,12 +47,26 @@ var keyState = {
 //PRZEANALIZOWAĆ
 
 function init() {
-    ship = new Ship(GAME_SIZE, context);
+    ship = new Ship();
 }
 
 function update(e) {
-    ship.move(keyState, canvasContext);
-    //dodac kontekst do move()
+    CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
+    ship.move(keyState);
+
+    if (getRandomInt(1,100) > 99) {
+        asteroids.push(new Asteroid(getRandomInt(50,150)));
+    }
+    console.log(asteroids.length);
+    if (asteroids.length > 0) {
+        for(const asteroid of asteroids) {
+            asteroid.move();
+            if (asteroid.location.y > GAME_SIZE.height + 150) {
+                asteroids.splice(asteroids.indexOf(asteroid),1);
+                console.log("Asteroida usunieta");
+            }
+        }
+    }
 }
 //DOBRZE, ale nieskończone
 
