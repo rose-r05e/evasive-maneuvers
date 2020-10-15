@@ -43,6 +43,32 @@ class Point {
         else throw new TypeError('Wrong type of arguments in point.translate().');
     }
 
+    /**
+    * rotates a point around the chosen point (default is the center of coordinate system)
+    * point.rotate(angle, point)
+    * @param {number} angle - angle (in radians)
+    * @param {Object} reference - point around which you want rotate
+    */
+    rotate(angle, reference) {
+        if (typeof angle === 'number' && typeof reference === 'undefined') {
+            let oldX = this.x;
+            let oldY = this.y;
+            let sinAngle = Math.sin(angle);
+            let cosAngle = Math.cos(angle);
+            this.x = oldX * cosAngle - oldY * sinAngle;
+            this.y = oldX * sinAngle + oldY * cosAngle;
+        }
+        else if (typeof angle === 'number' && reference instanceof Point) {
+            let oldX = this.x;
+            let oldY = this.y;
+            let sinAngle = Math.sin(angle);
+            let cosAngle = Math.cos(angle);
+            this.x = reference.x + (oldX - reference.x) * cosAngle - (oldY - reference.y) * sinAngle;
+            this.y = reference.y + (oldX - reference.x) * sinAngle + (oldY - reference.y) * cosAngle;
+        }
+        else throw new TypeError('Wrong type of arguments in point.rotate().');
+    }
+
     // Returns true if the point p lies  
     // inside the polygon[] with n vertices 
     isInside(polygon) 

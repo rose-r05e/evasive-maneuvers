@@ -39,6 +39,20 @@ class Polygon {
         else throw new TypeError('Wrong type of arguments in polygon.translate().');
     }
 
+    rotate(angle, reference) {
+        if (typeof angle === 'number' && typeof reference === 'undefined') {
+            for (const point of this.points) {
+                point.rotate(angle);
+            }
+        }
+        else if (typeof angle === 'number' && reference instanceof Point) {
+            for (const point of this.points) {
+                point.rotate(angle, reference);
+            }
+        }
+        else throw new TypeError('Wrong type of arguments in polygon.rotate().');
+    }
+
     copy() { return new Polygon(this.points);}
 
     get perimeter() {
