@@ -2,8 +2,9 @@ class Ship {
 
     constructor() {
         this._size = 15;
-        this._shape = new Polygon([new Point(0,-this.size), new Point(-this.size,this.size), new Point(this.size, this.size)]);
         this._center = new Point(GAME_SIZE.width * 1/2, GAME_SIZE.height * 3/4);
+        this._shape = new Polygon([new Point(0,-this.size), new Point(-this.size,this.size), new Point(this.size, this.size)]);
+        this.shape.translate(this.center.x, this.center.y);
         this._speed = GAME_SIZE.height * 1/200;
         this.initialize();
     }
@@ -46,22 +47,15 @@ class Ship {
         }
         movementVector.normalize();
         movementVector.multiply(this.speed);
-        //console.log("wektor przemieszczenia statku x=" + movementVector.x +" y="+ movementVector.y);
         this.center.translate(movementVector);
-        //console.log("shipX: " + this.center.x + " shipY: " + this.center.y);
-        let shapeCopy = this.shape.copy();
-        shapeCopy.translate(this.center.x, this.center.y)
-        drawPolygon(shapeCopy);
+        this.shape.translate(movementVector);
+        drawPolygon(this.shape);
         CONTEXT.fillStyle = "#FF0000";
         CONTEXT.fillRect(this.center.x-1,this.center.y+1,3,3);
     }
 
-    initialize(CONTEXT) {
-        //this._shipShape.translate(this._shipCenter.x, this._shipCenter.y);
-        //console.log("shipX: " + this.center.x + " shipY: " + this.center.y);
-        let shapeCopyy = this.shape.copy();
-        shapeCopyy.translate(this.center.x, this.center.y)
-        drawPolygon(shapeCopyy, CONTEXT);
+    initialize() {
+        drawPolygon(this.shape);
     }
 }
 
