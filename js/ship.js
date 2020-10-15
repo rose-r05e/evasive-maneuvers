@@ -1,36 +1,61 @@
 class Ship {
 
-    constructor(game_size, ctx) {
-
-        this._shipShape = new Polygon([new Point(0,5), new Point(-5, -5), new Point(5, -5)]);
-        this._shipCenter = new Point(game_size.width * 1/2, game_size.height * 3/4);
-        this._speed = game_size.height * 1/50;
-        this.initialize(ctx);
+    constructor() {
+        this._size = 15;
+        this._center = new Point(GAME_SIZE.width * 1/2, GAME_SIZE.height * 3/4);
+        this._shape = new Polygon([new Point(0,-this.size), new Point(-this.size,this.size), new Point(this.size, this.size)]);
+        this.shape.translate(this.center.x, this.center.y);
+        this._speed = GAME_SIZE.height * 1/200;
+        this.initialize();
     }
-    move(ks, ctx) {
+    set size(newSize) {
+        this._size = newSize;
+    }
+    get size() {
+        return this._size;
+    }
+
+    get shape() {
+        return this._shape;
+    }
+
+    get speed() {
+        return this._speed;
+    }
+
+    set center(newCenter) {
+        this._center = newCenter;
+    }
+    get center() {
+        return this._center;
+    }
+
+
+    move(keyState) {
         let movementVector = new Vector(0,0);
-        if(ks.up) {
-            tempVector.add(0,-1);
+        if(keyState.up && INTERSPACE < this.center.y) {
+            movementVector.add(0,-1);
         }
-        if(ks.down) {
-            tempVector.add(0,1);
+        if(keyState.down && this.center.y < GAME_SIZE.height - INTERSPACE) {
+            movementVector.add(0,1);
         }
-        if(ks.left) {
-            tempVector.add(-1,0);
+        if(keyState.left && INTERSPACE < this.center.x) {
+            movementVector.add(-1,0);
         }
-        if(ks.right) {
-            tempVector.add(1,0);
+        if(keyState.right && this.center.x < GAME_SIZE.width - INTERSPACE) {
+            movementVector.add(1,0);
         }
         movementVector.normalize();
-        movementVector.multiply(this._speed);
-        this._shipCenter.translate(movementVector);
-        this._shipShape.translate(this._shipCenter);
-        drawPolygon(this._shipShape, ctx);
+        movementVector.multiply(this.speed);
+        this.center.translate(movementVector);
+        this.shape.translate(movementVector);
+        drawPolygon(this.shape);
+        CONTEXT.fillStyle = "#FF0000";
+        CONTEXT.fillRect(this.center.x-1,this.center.y+1,3,3);
     }
 
-    initialize(ctx) {
-        this._shipShape.translate(this._shipCenter);
-        drawPolygon(this._shipShape, ctx);
+    initialize() {
+        drawPolygon(this.shape);
     }
 }
 
