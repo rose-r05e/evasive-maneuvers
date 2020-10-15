@@ -27,6 +27,8 @@ const CONTEXT = CANVAS.getContext('2d');
 var ship;
 var asteroids = new Array();
 var shots = new Array();
+var shotDelay = 30;
+var sinceLastShot = shotDelay;
 
 var keyState = {
     up: false,
@@ -56,9 +58,12 @@ function update(e) {
     CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
     ship.move(keyState);
 
-    if (keyState.fire == true) {
+    if (keyState.fire == true && sinceLastShot > shotDelay) {
         shots.push(new Shot(new Point(ship.center.x, ship.center.y - ship.size)));
+        sinceLastShot = 0;
     }
+    sinceLastShot += 1;
+
 
     if (shots.length > 0) {
         for (const shot of shots) {
@@ -87,6 +92,10 @@ function update(e) {
             for (const asteroid of asteroids) {
                 console.log(asteroid.shape instanceof Polygon);
                 if (shot.location.isInside(asteroid.shape)) {
+                    if (asteroid.size > 66) {
+                        asteroids.push(new Asteroid(asteroid.size/2, new Point(asteroid.location.x - 30, asteroid.location.y)));
+                        asteroids.push(new Asteroid(asteroid.size/2, new Point(asteroid.location.x + 30, asteroid.location.y)));
+                    }
                     asteroids.splice(asteroids.indexOf(asteroid),1);
                     shots.splice(shots.indexOf(shot),1);
                 }

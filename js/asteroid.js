@@ -1,6 +1,7 @@
 class Asteroid {
-    constructor(size) {
+    constructor(size, startPoint) {
 
+        this._size = size;
         let R = size/2;
         let r = size/4;
 
@@ -21,8 +22,12 @@ class Asteroid {
         }
         
 
-
-        this._location = new Point(getRandomInt(0,GAME_SIZE.width), -100);
+        if (startPoint instanceof Point) {
+            this._location = startPoint;
+        }
+        else {
+            this._location = new Point(getRandomInt(0,GAME_SIZE.width), -100);
+        }
 
         this._shape = new Polygon(points);
         this.shape.translate(this.location.x, this.location.y);
@@ -32,6 +37,10 @@ class Asteroid {
         this._rotationSpeed = getRandomInt(-10,10)/1000;
 
         this.spawn();
+    }
+
+    get size() {
+        return this._size;
     }
 
     set location(newLocation) {
