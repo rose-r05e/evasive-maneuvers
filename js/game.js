@@ -26,12 +26,14 @@ const CONTEXT = CANVAS.getContext('2d');
 
 var ship;
 var asteroids = new Array();
+var shots = new Array();
 
 var keyState = {
     up: false,
     down: false,
     left: false,
-    right: false
+    right: false,
+    fire: false
 }
 
 //????Przechowywać punkty i wartości do rysowania?
@@ -54,19 +56,44 @@ function update(e) {
     CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
     ship.move(keyState);
 
-    if (getRandomInt(1,100) > 99) {
-        asteroids.push(new Asteroid(getRandomInt(50,150)));
+    if (keyState.fire == true) {
+        shots.push(new Shot(new Point(ship.center.x, ship.center.y - ship.size)));
     }
-    console.log(asteroids.length);
-    if (asteroids.length > 0) {
-        for(const asteroid of asteroids) {
-            asteroid.move();
-            if (asteroid.location.y > GAME_SIZE.height + 150) {
-                asteroids.splice(asteroids.indexOf(asteroid),1);
-                console.log("Asteroida usunieta");
+
+    if (shots.length > 0) {
+        for (const shot of shots) {
+            shot.update();
+            if (shot.location.y < -10) {
+                shots.splice(shots.indexOf(shot),1);
             }
         }
     }
+
+    if (getRandomInt(1,100) > 99) {
+        asteroids.push(new Asteroid(getRandomInt(50,150)));
+    }
+
+    if (asteroids.length > 0) {
+        for(const asteroid of asteroids) {
+            asteroid.move();
+            if (asteroid.location.y > GAME_SIZE.height + 100 || asteroid.location.x < -100 || asteroid.location.x > GAME_SIZE.width + 100) {
+                asteroids.splice(asteroids.indexOf(asteroid),1);
+            }
+        }
+    }
+
+    if (asteroids.length > 0 && shots.length > 0) {
+        for (const shot of shots) {
+            for (const asteroid of asteroids) {
+                console.log(asteroid.shape instanceof Polygon);
+                if (shot.location.isInside(asteroid.shape)) {
+                    asteroids.splice(asteroids.indexOf(asteroid),1);
+                    shots.splice(shots.indexOf(shot),1);
+                }
+            }
+        }
+    }
+
 }
 //DOBRZE, ale nieskończone
 
@@ -84,6 +111,9 @@ function onKeyDown(e) {
     if (e.keyCode == ARROW_RIGHT) {
         keyState.right = true;
     }
+    if (e.keyCode == SPACE) {
+        keyState.fire = true;
+    }
 }
 //DOBRZE
 function onKeyUp(e) {
@@ -98,6 +128,9 @@ function onKeyUp(e) {
     }
     if (e.keyCode == ARROW_RIGHT) {
         keyState.right = false;
+    }
+    if (e.keyCode == SPACE) {
+        keyState.fire = false;
     }
 }
 //DOBRZE

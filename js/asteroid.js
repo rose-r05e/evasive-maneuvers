@@ -1,26 +1,28 @@
 class Asteroid {
     constructor(size) {
 
-        let R = size;
-        let r = size/2;
-        let rr = size/4;
+        let R = size/2;
+        let r = size/4;
 
         let points = new Array();
 
-        for (i=0; i <= getRandomInt(2,3); i++) {
-            points.push(new Point(getRandomInt(-r, rr), getRandomInt(-r, -rr)));
+        
+        for (i=0; i <= getRandomInt(1,2); i++) {
+            points.push(new Point(getRandomInt(-r, r), getRandomInt(-R, -r)));
         }
-        for (i=0; i <= getRandomInt(2,3); i++) {
-            points.push(new Point(getRandomInt(rr, r), getRandomInt(-r, rr)));
+        for (i=0; i <= getRandomInt(1,2); i++) {
+            points.push(new Point(getRandomInt(r, R), getRandomInt(-r, r)));
         }
-        for (i=0; i <= getRandomInt(2,3); i++) {
-            points.push(new Point(getRandomInt(-rr, r), getRandomInt(rr, r)));
+        for (i=0; i <= getRandomInt(1,2); i++) {
+            points.push(new Point(getRandomInt(-r, r), getRandomInt(r, R)));
         }
-        for (i=0; i <= getRandomInt(2,3); i++) {
-            points.push(new Point(getRandomInt(-r, -rr), getRandomInt(-rr, r)));
+        for (i=0; i <= getRandomInt(1,2); i++) {
+            points.push(new Point(getRandomInt(-R, -r), getRandomInt(-r, r)));
         }
+        
 
-        this._location = new Point(getRandomInt(0,GAME_SIZE.width), -150);
+
+        this._location = new Point(getRandomInt(0,GAME_SIZE.width), -100);
 
         this._shape = new Polygon(points);
         this.shape.translate(this.location.x, this.location.y);
@@ -60,6 +62,6 @@ class Asteroid {
         this.shape.translate(this.movementVector);
         drawPolygon(this.shape);
         CONTEXT.fillStyle = "#FF0000";
-        CONTEXT.fillRect(this.location.x-1,this.location.y+1,3,3);
+        CONTEXT.fillRect(this.location.x-1,this.location.y-1,3,3);
     }
 }

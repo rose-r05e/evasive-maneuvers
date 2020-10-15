@@ -30,7 +30,6 @@ class Ship {
         return this._center;
     }
 
-
     move(keyState) {
         let movementVector = new Vector(0,0);
         if(keyState.up && INTERSPACE < this.center.y) {
@@ -51,7 +50,7 @@ class Ship {
         this.shape.translate(movementVector);
         drawPolygon(this.shape);
         CONTEXT.fillStyle = "#FF0000";
-        CONTEXT.fillRect(this.center.x-1,this.center.y+1,3,3);
+        CONTEXT.fillRect(this.center.x-1,this.center.y-1,3,3);
     }
 
     initialize() {
