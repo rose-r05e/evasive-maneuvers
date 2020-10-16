@@ -26,7 +26,7 @@ class Shot {
         CONTEXT.fillRect(this.location.x-1,this.location.y-1,3,7);
     }
 
-    isOnScreen() {
+    isOutOfScreen() {
         if (this.location.y < -7) {
             return true;
         }

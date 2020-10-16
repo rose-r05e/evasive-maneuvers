@@ -64,10 +64,13 @@ class Ship {
                     return true;
                 }
             }
+            for (let point of object.shape.points) {
+                if (point.isInside(this.shape)) {
+                    return true;
+                }
+            }
         }
         return false;
     }
 
 }
-
-//export {Ship};

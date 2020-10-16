@@ -82,7 +82,7 @@ class Asteroid {
         return afterSplit;
     }
 
-    isOnScreen() {
+    isOutOfScreen() {
         if (this.location.y > GAME_SIZE.height + this.size || this.location.x < -this.size || this.location.x > GAME_SIZE.width + this.size) {
             return true;
         }

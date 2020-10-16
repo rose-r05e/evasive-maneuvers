@@ -16,7 +16,7 @@ const GAME_SIZE = {
     height: 848,
     width: 470
 }
-const INTERSPACE = 30;
+const INTERSPACE = 20;
 const FPS = 60;
 
 const CANVAS = document.getElementById('gameContainer');
@@ -63,6 +63,7 @@ function init() {
 
 function update() {
     CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
+
     ship.move(keyState);
 
     if (keyState.fire == true && sinceLastShot > shotDelay) {
@@ -75,7 +76,7 @@ function update() {
     if (shots.length > 0) {
         for (const shot of shots) {
             shot.update();
-            if (shot.isOnScreen()) {
+            if (shot.isOutOfScreen()) {
                 shots.splice(shots.indexOf(shot),1);
             }
         }
@@ -88,7 +89,7 @@ function update() {
     if (asteroids.length > 0) {
         for(const asteroid of asteroids) {
             asteroid.update();
-            if (asteroid.isOnScreen()) {
+            if (asteroid.isOutOfScreen()) {
                 asteroids.splice(asteroids.indexOf(asteroid),1);
             }
         }
