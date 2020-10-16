@@ -24,9 +24,16 @@ CANVAS.height = GAME_SIZE.height;
 CANVAS.width = GAME_SIZE.width;
 const CONTEXT = CANVAS.getContext('2d');
 
+const ASTEROID_SIZE = {
+    max: 150,
+    min: 50,
+    splitLimit: 75
+}
+
 var ship;
 var asteroids = new Array();
 var shots = new Array();
+
 var shotDelay = 30;
 var sinceLastShot = shotDelay;
 
@@ -54,7 +61,7 @@ function init() {
     ship = new Ship();
 }
 
-function update(e) {
+function update() {
     CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
     ship.move(keyState);
 
@@ -68,7 +75,7 @@ function update(e) {
     if (shots.length > 0) {
         for (const shot of shots) {
             shot.update();
-            if (shot.location.y < -10) {
+            if (shot.isOnScreen()) {
                 shots.splice(shots.indexOf(shot),1);
             }
         }
@@ -80,26 +87,35 @@ function update(e) {
 
     if (asteroids.length > 0) {
         for(const asteroid of asteroids) {
-            asteroid.move();
-            if (asteroid.location.y > GAME_SIZE.height + 100 || asteroid.location.x < -100 || asteroid.location.x > GAME_SIZE.width + 100) {
+            asteroid.update();
+            if (asteroid.isOnScreen()) {
                 asteroids.splice(asteroids.indexOf(asteroid),1);
             }
         }
     }
 
     if (asteroids.length > 0 && shots.length > 0) {
-        for (const shot of shots) {
-            for (const asteroid of asteroids) {
-                console.log(asteroid.shape instanceof Polygon);
-                if (shot.location.isInside(asteroid.shape)) {
-                    if (asteroid.size > 66) {
-                        asteroids.push(new Asteroid(asteroid.size/2, new Point(asteroid.location.x - 30, asteroid.location.y)));
-                        asteroids.push(new Asteroid(asteroid.size/2, new Point(asteroid.location.x + 30, asteroid.location.y)));
+        for (const asteroid of asteroids) {
+            for (const shot of shots) {
+                if (asteroid.isHit(shot)) {
+                    if (asteroid.size > ASTEROID_SIZE.splitLimit) {
+                        let splitted = asteroid.split();
+                        for (let newAsteroid of splitted) {
+                            asteroids.push(newAsteroid);
+                        }
                     }
                     asteroids.splice(asteroids.indexOf(asteroid),1);
                     shots.splice(shots.indexOf(shot),1);
                 }
             }
+        }
+    }
+
+    for (const asteroid of asteroids) {
+        if (ship.isCollided(asteroid)) {
+            CONTEXT.fillStyle = "#FF0000";
+            CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
+            clearInterval(loop);
         }
     }
 
@@ -148,5 +164,5 @@ function onKeyUp(e) {
 init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
-setInterval(update, 1000 / FPS);
+var loop = setInterval(update, 1000 / FPS);
 //DOBRZE!

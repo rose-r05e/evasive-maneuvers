@@ -56,6 +56,18 @@ class Ship {
     initialize() {
         drawPolygon(this.shape);
     }
+
+    isCollided(object) {
+        if (distance(object.location, this.center) < object.size) {
+            for (let point of this.shape.points) {
+                if (point.isInside(object.shape)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
 
 //export {Ship};

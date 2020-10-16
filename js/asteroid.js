@@ -65,12 +65,31 @@ class Asteroid {
     spawn() {
         drawPolygon(this.shape);
     }
-    move() {
+
+    update() {
         this.shape.rotate(this.rotationSpeed, this.location);
         this.location.translate(this.movementVector);
         this.shape.translate(this.movementVector);
         drawPolygon(this.shape);
         CONTEXT.fillStyle = "#FF0000";
         CONTEXT.fillRect(this.location.x-1,this.location.y-1,3,3);
+    }
+
+    split() {
+        let afterSplit = new Array();
+        afterSplit.push(new Asteroid(this.size/2, new Point(this.location.x - this.size/4, this.location.y)));
+        afterSplit.push(new Asteroid(this.size/2, new Point(this.location.x + this.size/4, this.location.y)));
+        return afterSplit;
+    }
+
+    isOnScreen() {
+        if (this.location.y > GAME_SIZE.height + this.size || this.location.x < -this.size || this.location.x > GAME_SIZE.width + this.size) {
+            return true;
+        }
+        else return false;
+    }
+
+    isHit(shot) {
+        return shot.location.isInside(this.shape);
     }
 }
