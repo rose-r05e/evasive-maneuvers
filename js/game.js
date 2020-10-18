@@ -24,12 +24,20 @@ CANVAS.height = GAME_SIZE.height;
 CANVAS.width = GAME_SIZE.width;
 const CONTEXT = CANVAS.getContext('2d');
 
+const UI_SIZE = {
+    height: GAME_SIZE.height/10,
+    width: GAME_SIZE.width,
+    font: "30px Arial",
+    color: "#FFFFFF"
+}
+
 const ASTEROID_SIZE = {
     max: 150,
     min: 50,
     splitLimit: 75
 }
 
+var ui;
 var ship;
 var asteroids = new Array();
 var shots = new Array();
@@ -58,6 +66,7 @@ var keyState = {
 //PRZEANALIZOWAĆ
 
 function init() {
+    ui = new UI();
     ship = new Ship();
 }
 
@@ -112,11 +121,12 @@ function update() {
         }
     }
 
+    ui.update();
+
     for (const asteroid of asteroids) {
         if (ship.isCollided(asteroid)) {
-            CONTEXT.fillStyle = "#FF0000";
-            CONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
-            clearInterval(loop);
+            ui.timer.stop();
+            clearInterval(gameLoop);
         }
     }
 
@@ -165,5 +175,5 @@ function onKeyUp(e) {
 init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
-var loop = setInterval(update, 1000 / FPS);
+var gameLoop = setInterval(update, 1000 / FPS);
 //DOBRZE!

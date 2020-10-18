@@ -26,7 +26,7 @@ class Asteroid {
             this._location = startPoint;
         }
         else {
-            this._location = new Point(getRandomInt(0,GAME_SIZE.width), -100);
+            this._location = new Point(getRandomInt(0,GAME_SIZE.width), UI_SIZE.height- this.size);
         }
 
         this._shape = new Polygon(points);

@@ -32,7 +32,7 @@ class Ship {
 
     move(keyState) {
         let movementVector = new Vector(0,0);
-        if(keyState.up && INTERSPACE < this.center.y) {
+        if(keyState.up && UI_SIZE.height + INTERSPACE < this.center.y) {
             movementVector.add(0,-1);
         }
         if(keyState.down && this.center.y < GAME_SIZE.height - INTERSPACE) {

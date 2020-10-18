@@ -27,7 +27,7 @@ class Shot {
     }
 
     isOutOfScreen() {
-        if (this.location.y < -7) {
+        if (this.location.y < UI_SIZE.height -7) {
             return true;
         }
         else return false;
