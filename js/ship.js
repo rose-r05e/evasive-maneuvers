@@ -32,16 +32,16 @@ class Ship {
 
     move(keyState) {
         let movementVector = new Vector(0,0);
-        if(keyState.up && UI_SIZE.height + INTERSPACE < this.center.y) {
+        if(keyState.W && UI_SIZE.height + INTERSPACE < this.center.y) {
             movementVector.add(0,-1);
         }
-        if(keyState.down && this.center.y < GAME_SIZE.height - INTERSPACE) {
+        if(keyState.S && this.center.y < GAME_SIZE.height - INTERSPACE) {
             movementVector.add(0,1);
         }
-        if(keyState.left && INTERSPACE < this.center.x) {
+        if(keyState.A && INTERSPACE < this.center.x) {
             movementVector.add(-1,0);
         }
-        if(keyState.right && this.center.x < GAME_SIZE.width - INTERSPACE) {
+        if(keyState.D && this.center.x < GAME_SIZE.width - INTERSPACE) {
             movementVector.add(1,0);
         }
         movementVector.normalize();
@@ -74,3 +74,4 @@ class Ship {
     }
 
 }
+
