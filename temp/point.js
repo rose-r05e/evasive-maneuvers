@@ -73,11 +73,11 @@ class Point {
     // inside the polygon[] with n vertices 
     isInside(polygon) 
     { 
-        let n = polygon.points.lenght;
+        let n = polygon.points.length;
         let inf = 10000; 
   
         // Create a point for line segment from p to infinite 
-        let extreme = new Point(inf, p.y); 
+        let extreme = new Point(inf, this.y); 
   
         // Count intersections of the above line  
         // with sides of polygon 
@@ -89,14 +89,14 @@ class Point {
             // Check if the line segment from 'p' to  
             // 'extreme' intersects with the line  
             // segment from 'polygon[i]' to 'polygon[next]' 
-            if (doIntersect(polygon[i], polygon[next], p, extreme))  
+            if (doIntersect(polygon.points[i], polygon.points[next], this, extreme))  
             { 
                 // If the point 'p' is colinear with line  
                 // segment 'i-next', then check if it lies  
                 // on segment. If it lies, return true, otherwise false 
-                if (pointOrientation(polygon[i], p, polygon[next]) == 0) 
+                if (pointOrientation(polygon.points[i], this, polygon.points[next]) == 0) 
                 { 
-                    return onSegment(polygon[i], p, polygon[next]); 
+                    return onSegment(polygon.points[i], this, polygon.points[next]); 
                 } 
   
                 count++; 
