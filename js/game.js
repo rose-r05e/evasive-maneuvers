@@ -175,5 +175,9 @@ function onKeyUp(e) {
 init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
+window.addEventListener("stop", function() {
+    ui.timer.stop();
+    clearInterval(gameLoop);
+});
 var gameLoop = setInterval(update, 1000 / FPS);
 //DOBRZE!
