@@ -125,8 +125,7 @@ function update() {
 
     for (const asteroid of asteroids) {
         if (ship.isCollided(asteroid)) {
-            ui.timer.stop();
-            clearInterval(gameLoop);
+            window.dispatchEvent(new Event("stop"));
         }
     }
 
@@ -175,9 +174,9 @@ function onKeyUp(e) {
 init();
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
+var gameLoop = setInterval(update, 1000 / FPS);
 window.addEventListener("stop", function() {
     ui.timer.stop();
     clearInterval(gameLoop);
 });
-var gameLoop = setInterval(update, 1000 / FPS);
 //DOBRZE!
