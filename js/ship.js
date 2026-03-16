@@ -30,10 +30,9 @@ class Ship {
         return this._center;
     }
 
-
     move(keyState) {
         let movementVector = new Vector(0,0);
-        if(keyState.up && INTERSPACE < this.center.y) {
+        if(keyState.up && UI_SIZE.height + INTERSPACE < this.center.y) {
             movementVector.add(0,-1);
         }
         if(keyState.down && this.center.y < GAME_SIZE.height - INTERSPACE) {
@@ -51,12 +50,30 @@ class Ship {
         this.shape.translate(movementVector);
         drawPolygon(this.shape);
         CONTEXT.fillStyle = "#FF0000";
-        CONTEXT.fillRect(this.center.x-1,this.center.y+1,3,3);
+        CONTEXT.fillRect(this.center.x-1,this.center.y-1,3,3);
     }
 
     initialize() {
         drawPolygon(this.shape);
     }
+
+    isCollided(object) {
+        if (distance(object.location, this.center) < object.size) {
+            for (let point of this.shape.points) {
+                if (point.isInside(object.shape)) {
+                    return true;
+                }
+            }
+            for (let point of object.shape.points) {
+                if (point.isInside(this.shape)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
 
-//export {Ship};
+
+
