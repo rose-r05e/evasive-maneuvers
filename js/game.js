@@ -176,10 +176,4 @@ window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 var gameLoop = setInterval(update, 1000 / FPS);
 
-window.addEventListener('message', (event) => {
-  if (event.data?.type === 'stop') {
-          ui.timer.stop();
-            clearInterval(gameLoop);
-  }
-});
 //DOBRZE!
