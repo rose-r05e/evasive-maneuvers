@@ -1,7 +1,7 @@
 /**
  * @name VectorJS
  * @description An implementation of two dimensional mathematical vectors in JavaScript.
- * @author Remigiusz Galikowski
+ * @author Rose A.K.A. R05E
  */
 
 class Vector {
